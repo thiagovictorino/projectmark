@@ -1,0 +1,41 @@
+
+version: '3'
+# volumes list.
+
+volumes:
+  mysql-pm-data:
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: pm-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+    volumes:
+      - 'mysql-pm-data:/var/lib/mysql'
+    ports:
+      - "33099:3306" #external access
+    entrypoint:
+      sh -c "
+      echo 'CREATE DATABASE IF NOT EXISTS pm; GRANT ALL PRIVILEGES ON pm.* TO '\''root'\''@'\''%'\''; ' > /docker-entrypoint-initdb.d/init.sql;
+      echo 'CREATE DATABASE IF NOT EXISTS pm_tests; GRANT ALL PRIVILEGES ON pm_tests.* TO '\''root'\''@'\''%'\''; ' >> /docker-entrypoint-initdb.d/init.sql;
+      /usr/local/bin/docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default-authentication-plugin=mysql_native_password
+      "
+    networks:
+      - local
+
+  backend:
+    image: ambientum/php:7.3-nginx
+    container_name: pm-app
+    restart: always
+    ports:
+      - "8888:8080"
+    volumes:
+      - .:/var/www/app
+    networks:
+      - local
+
+networks:
+  local:
+    driver: bridge
+
