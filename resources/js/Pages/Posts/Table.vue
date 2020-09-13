@@ -36,8 +36,6 @@
                                 <a href="#" class="text-indigo-600 hover:text-indigo-900">Visit</a>
                             </td>
                         </tr>
-
-                        <!-- More rows... -->
                         </tbody>
                     </table>
                 </div>

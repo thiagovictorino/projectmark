@@ -15,7 +15,7 @@
                                     <Alert title="Success!">{{ $page.flash.success }}</Alert>
                                 </div>
                                 <div v-if="$page.flash.error" class="mr-4">
-                                    <Alert title="Error" color="red">{{ $page.flash.error }}</Alert>
+                                    <Alert title="Error!" color="red">{{ $page.flash.error }}</Alert>
                                 </div>
                             </div>
                             <div class="">
