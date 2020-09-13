@@ -26,6 +26,10 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "nprogress": "^0.2.0"
+        "element-tiptap": "^1.26.2",
+        "element-ui": "^2.13.2",
+        "nprogress": "^0.2.0",
+        "tiptap": "^1.29.6",
+        "tiptap-extensions": "^1.32.7"
     }
 }
