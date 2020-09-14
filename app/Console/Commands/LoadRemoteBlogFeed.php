@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Post;
 use App\Models\User;
+use App\Services\BlogService;
 use App\Services\RemoteFeedService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -52,6 +53,6 @@ class LoadRemoteBlogFeed extends Command
         }
 
         Post::insert($posts);
-        Cache::forget('blog.index');
+        BlogService::clearCachePosts();
     }
 }

@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    public function index(BlogService $blogService){
-        return view('blog')->with('posts',$blogService->listPosts());
+    public function index(Request $request, BlogService $blogService){
+        return view('blog')
+            ->with('posts',$blogService->listPosts())
+            ->with('page',$request->get('page', 1));
     }
 
     public function post($id, BlogService $blogService){
