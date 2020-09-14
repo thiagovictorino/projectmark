@@ -67,7 +67,7 @@ To feed the blog using a predefined remote rest api, run:
 $ docker exec -it pm-app php artisan pm:seed
 ```
 
-### Accessing admin
+### Accessing the Admin
 A default user was created by migrations, the credentials are
 ```
 user: admin@projectmark.com
