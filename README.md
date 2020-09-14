@@ -15,7 +15,7 @@ Considering that You already have this project cloned, follow the instructions b
 
 ### Creating the .env
 
-This project includes a .env.example file where is ready to go, copy this file 
+This project includes a .env.example file where is ready to use, copy this file 
 renaming to `.env` 
 
 ```sh
@@ -30,11 +30,16 @@ To start the containers
 $ cd docker/
 $ docker-compose up -d
 ```  
-This command will create a ngnix server running on `8888` port.
+This command will create a ngnix server running on port `8888`.
 
 Installing composer packages
 ```sh
 $ docker exec -it pm-app composer install
+```
+
+Generating key
+```sh
+$ docker exec -it pm-app php artisan key:generate
 ```
 
 Running migrations
