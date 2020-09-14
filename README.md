@@ -1,61 +1,74 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## About Very Famous Blog
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+This project was built using [Laravel 8](https://laravel.com/docs/8.x) and [Jetstream](https://jetstream.laravel.com/1.x/introduction.html) 
+presets with [VueJS](https://vuejs.org) and [Intertia](https://inertiajs.com)
 
-## About Laravel
+## Installation
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+If You will run this project using a regular server, please, see [all Laravel 8 requirements](https://laravel.com/docs/8.x#server-requirements).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Fortunately, this project includes a pre-configured docker-compose.yml file where
+includes all that You need, except the npm. So, You will need to have the npm installed locally 
+if You want to develop something new.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Considering that You already have this project cloned, follow the instructions below.
 
-## Learning Laravel
+### Creating the .env
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+This project includes a .env.example file where is ready to go, copy this file 
+renaming to `.env` 
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```sh
+$ cp .env.example .env
+```
 
-## Laravel Sponsors
+### Using docker
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+To start the containers
 
-### Premium Partners
+```sh
+$ cd docker/
+$ docker-compose up -d
+```  
+This command will create a ngnix server running on `8888` port.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+Installing composer packages
+```sh
+$ docker exec -it pm-app composer install
+```
 
-## Contributing
+Running migrations
+```sh
+$ docker exec -it pm-app php artisan migrate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+That is it! 
 
-## Code of Conduct
+You can access the blog with the url [http://localhost:8888](http://localhost:8888)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+The admin url is [http://localhost:8888/login](http://localhost:8888/login) or 
+[http://localhost:8888/register](http://localhost:8888/register) to register a new user.  
 
-## Security Vulnerabilities
+### Running tests
+Some tests were created and it is accessible using the command 
+```sh
+$ docker exec -it pm-app php artisan test
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Feeding the blog
+To feed the blog using a predefined remote rest api, run:
 
-## License
+```sh
+$ docker exec -it pm-app php artisan pm:seed
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Accessing admin
+A default user was created by migrations, the credentials are
+```
+user: admin@projectmark.com
+pass: admin
+```
+
+### Scheduled jobs
+There is a job scheduled to run every some minutes. Currently, it is not running
+directly by docker. So to keep it working, it is necessary to use a local cron entry.  
