@@ -1,5 +1,7 @@
 @extends('layouts.master')
-
+@section('title')
+    Very Famous Blog
+@endsection
 @section('content')
     <div class="divide-y divide-gray-200">
         <div class="pt-6 pb-8 space-y-2 md:space-y-5"><h1
