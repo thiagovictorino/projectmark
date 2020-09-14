@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', BlogController::class.'@index');
+Route::get('/posts/{id}', BlogController::class.'@post');
 
 Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('dashboard', DashboardController::class.'@index')->name('dashboard');

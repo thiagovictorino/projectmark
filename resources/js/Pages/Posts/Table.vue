@@ -33,7 +33,7 @@
 
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Visit</a>
+                                <a :href="`/posts/${post.published_at}`" class="text-indigo-600 hover:text-indigo-900">Visit</a>
                             </td>
                         </tr>
                         </tbody>

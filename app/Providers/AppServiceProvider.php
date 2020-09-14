@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Post;
+use App\Observers\PostObserver;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
@@ -39,5 +41,7 @@ class AppServiceProvider extends ServiceProvider
                 'error' => Session::get('error'),
             ];
         });
+
+        Post::observe(PostObserver::class);
     }
 }

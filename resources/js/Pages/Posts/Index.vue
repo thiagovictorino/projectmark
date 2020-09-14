@@ -7,7 +7,7 @@
         </template>
         <div class="py-12">
             <div class="max-w-7xl mx-auto px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg sm:p-6 lg:p-8">
+                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6 lg:p-8">
                     <div v-if="posts.data.length > 0">
                         <div class="flex align-center">
                             <div class="flex-grow">

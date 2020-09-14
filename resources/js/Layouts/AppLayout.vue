@@ -7,7 +7,7 @@
                     <div class="flex">
                         <!-- Logo -->
                         <div class="flex-shrink-0 flex items-center">
-                            <a href="/admin">
+                            <a href="/admin/posts">
                                 <ApplicationLogo class="block h-12 w-auto" />
                             </a>
                         </div>
