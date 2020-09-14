@@ -12,7 +12,7 @@ class BlogController extends Controller
     }
 
     public function post($id, BlogService $blogService){
-        return view('post')->with('post',$blogService->get($id));
+        return view('post')->with('post',$blogService->getPost($id));
     }
 
 

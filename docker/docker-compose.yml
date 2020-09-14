@@ -27,11 +27,22 @@ services:
   backend:
     image: ambientum/php:7.3-nginx
     container_name: pm-app
-    restart: always
     ports:
       - "8888:8080"
     volumes:
-      - .:/var/www/app
+      - ../:/var/www/app
+    networks:
+      - local
+
+  scheduler:
+    image: ambientum/php:7.3
+    container_name: pm-jobs
+    command: crond -f -l 8
+    depends_on:
+      - backend
+    volumes:
+      - ../:/var/www/app
+      - ./crontabs:/etc/crontabs:ro
     networks:
       - local
 

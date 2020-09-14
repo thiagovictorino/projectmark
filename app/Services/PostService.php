@@ -42,7 +42,7 @@ class PostService
     }
 
     /**
-     * Return a valid sortable column - Currently the only column sortable is column_at but
+     * Return a valid sortable column - Currently the only column sortable is created_at but
      * it is easy to expand by incrementing the array $sortable_columns
      *
      * @param Request $request
