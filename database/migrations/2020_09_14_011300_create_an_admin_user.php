@@ -1,10 +1,12 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostsTable extends Migration
+class CreateAnAdminUser extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +15,11 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id');
-            $table->longText('title');
-            $table->longText('description');
-            $table->timestamps();
-        });
+        User::create([
+                'name' => 'Admin Buddy',
+                'email' => 'admin@projectmark.com',
+                'password' => bcrypt('admin')
+        ]);
     }
 
     /**
@@ -29,6 +29,6 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        DB::table('users')->where('email', 'admin@projectmark.com')->delete();
     }
 }
