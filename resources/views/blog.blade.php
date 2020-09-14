@@ -35,5 +35,25 @@
                 </li>
             @endforeach
         </ul>
+        <footer
+            class="flex text-sm font-medium leading-5 divide-y divide-gray-200 xl:col-start-1 xl:row-start-2 mb-4">
+            <div class="pt-8">
+                @if(count($posts) > 0)
+                    <a class="text-teal-500 hover:text-teal-600" href="/?page={{$page+1}}">
+                        ← Older posts
+                    </a>
+                @endif
+            </div>
+            <div class="flex-grow">
+
+            </div>
+            <div class="pt-8">
+                @if($page > 1)
+                    <a class="text-teal-500 hover:text-teal-600" href="/?page={{$page-1}}">
+                        Newer posts →
+                    </a>
+                @endif
+            </div>
+        </footer>
     </div>
 @endsection

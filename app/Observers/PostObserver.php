@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Post;
+use App\Services\BlogService;
 use Illuminate\Support\Facades\Cache;
 
 class PostObserver
@@ -15,7 +16,7 @@ class PostObserver
      */
     public function created(Post $post)
     {
-        Cache::forget('blog.index');
+        BlogService::clearCachePosts();
     }
 
     /**
@@ -26,7 +27,7 @@ class PostObserver
      */
     public function updated(Post $post)
     {
-        Cache::forget('blog.index');
+        BlogService::clearCachePosts();
         Cache::forget("blog.post.{$post->id}");
     }
 
@@ -38,7 +39,7 @@ class PostObserver
      */
     public function deleted(Post $post)
     {
-        Cache::forget('blog.index');
+        BlogService::clearCachePosts();
         Cache::forget("blog.post.{$post->id}");
     }
 
@@ -50,7 +51,7 @@ class PostObserver
      */
     public function restored(Post $post)
     {
-        Cache::forget('blog.index');
+        BlogService::clearCachePosts();
         Cache::forget("blog.post.{$post->id}");
     }
 
@@ -62,7 +63,7 @@ class PostObserver
      */
     public function forceDeleted(Post $post)
     {
-        Cache::forget('blog.index');
+        BlogService::clearCachePosts();
         Cache::forget("blog.post.{$post->id}");
     }
 }
